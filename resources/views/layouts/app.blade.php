@@ -26,7 +26,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{route('home')}}">
                     {{ config('app.name', 'My Videos') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,5 +86,9 @@
 
 
     </div>
+    <footer class="col-md-10 col-md-offset-1">
+        </hr>
+        <p>Your youtube...</p>
+    </footer>
 </body>
 </html>

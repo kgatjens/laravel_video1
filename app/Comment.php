@@ -10,6 +10,12 @@ class Comment extends Model
 
     //Relation many to one
     public function user(){
-    	return $this->belongsTo('MyVideos\User', 'lrv_users_id');
+    	return $this->belongsTo('MyVideos\User', 'user_id');
+    	//return $this->belongsTo('MyVideos\User', 'lrv_users_id');
+    }
+
+    public function video(){
+    	return $this->belongsTo('MyVideos\Video', 'video_id');
+    	//return $this->belongsTo('MyVideos\User', 'lrv_users_id');
     }
 }

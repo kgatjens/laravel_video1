@@ -159,6 +159,7 @@ return [
         // MyVideos\Providers\BroadcastServiceProvider::class,
         MyVideos\Providers\EventServiceProvider::class,
         MyVideos\Providers\RouteServiceProvider::class,
+        MyVideos\Providers\FormatTimeServiceProvider::class,
 
     ],
 
@@ -208,6 +209,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'FormatTime' => App\Helpers\FormatTime::class,
 
     ],
 

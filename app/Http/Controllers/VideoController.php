@@ -68,4 +68,63 @@ class VideoController extends Controller
     	return new Response($file, 200);
     }
 
+    public function getVideoDetail($video_id){
+        
+        $video = Video::with('comments')->find($video_id);
+
+        if($video){
+            return view('video.detail', array(
+                'video'=>$video
+            ));
+        }
+    }
+
+    public function getVideo($filename){
+        $file = Storage::disk('videos')->get($filename);
+        return new Response($file, 200);
+    }
+
+    public function delete($video_id){
+        $user = \Auth::user();
+        $video= Video::find($video_id);
+        $comments = Comment::where('video_id', $video_id)->get();
+
+        if($user && $video->user_id == $user->id){
+            //Delete comments
+            if($comments && count($comments)>=1){
+                Comment::where('video_id', $video_id)->get()->each->delete();
+            }
+
+            //Delete storage
+            Storage::disk('images')->delete($video->image);
+            Storage::disk('videos')->delete($video->video_path);
+
+            //Delete registers
+            $video->delete();     
+            $message = array('message'=>'Video deleted Succesfully!');
+        }else{
+            $message = array('message'=>'Video not deleted');
+        }
+
+        return redirect()->route('home')->with($message);
+    }
+
+    public function edit($video_id){
+        $user = \Auth::user();
+        $video= Video::find($video_id);
+
+        if($user && $video->user_id == $user->id){
+            //Edit comments
+            $video = Video::findOrFail($video_id);
+            return view('video.edit', array('video'=>$video));
+            
+        }else{
+            return redirect()->route('home');
+        }
+
+
+        
+    }
+
+
 }
